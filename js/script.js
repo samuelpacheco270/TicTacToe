@@ -18,36 +18,33 @@ function tieGame() {
         gameIsOver = true;
     }
 }
-function checkEqualValues(tile1, tile2, tile3){
-    console.log($(tile1).val())
-    console.log($(tile2).val())
-    console.log($(tile3).val())
 
+function checkEqualValues(tile1, tile2, tile3){
    return $(tile1).text() === $(tile2).text() && $(tile2).text()===$(tile3).text()
 }
 
 function CheckVerticalWins(){
-   return  checkEqualValues(`#tile1`,`#tile4`, `#tile7`) || checkEqualValues(`#tile2`,`#tile5`, `#tile8`) || checkEqualValues(`#tile3`,`#tile6`, `#tile9`)
+   return checkEqualValues(`#tile1`,`#tile4`, `#tile7`) || checkEqualValues(`#tile2`,`#tile5`, `#tile8`) || checkEqualValues(`#tile3`,`#tile6`, `#tile9`)
 }
 function CheckHorizontalWins() {
-return false
+    return checkEqualValues(`#tile1`,`#tile2`,`#tile3`) || checkEqualValues(`#tile4`,`#tile5`,`#tile6`) || checkEqualValues(`#tile7`,`#tile8`,`#tile9`)
 }
 function CheckDiagonalWins() {
-return false
+    return checkEqualValues(`#tile1`,`#tile5`,`#tile9`) || checkEqualValues(`#tile3`,`#tile5`,`#tile7`)
 }
 function CheckWin () {
+    // CheckVerticalWins();  
     return CheckVerticalWins() || CheckHorizontalWins() || CheckDiagonalWins()
 }
 function performLogic(button,tile) {
     $(button).hide();
     $(tile).html(player);
-    changePlayers();
-    tieGame()
-
     if ( CheckWin()) {
         $("h1").text(player + `Wins!`);
         gameIsOver = true
     }
+    changePlayers();
+    tieGame()
 }
 
 $("#button1").click(function() {
